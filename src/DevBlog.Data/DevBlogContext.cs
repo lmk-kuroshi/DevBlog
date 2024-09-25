@@ -41,7 +41,7 @@ namespace DevBlog.Data
                .HasKey(x => new { x.UserId });
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker
                .Entries()
@@ -54,12 +54,6 @@ namespace DevBlog.Data
                     && dateCreatedProp != null)
                 {
                     dateCreatedProp.SetValue(entityEntry.Entity, DateTime.Now);
-                }
-                var modifiedDateProp = entityEntry.Entity.GetType().GetProperty("ModifiedDate");
-                if (entityEntry.State == EntityState.Added
-                    && modifiedDateProp != null)
-                {
-                    modifiedDateProp.SetValue(entityEntry.Entity, DateTime.Now);
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
