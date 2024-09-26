@@ -6,7 +6,7 @@ namespace DevBlog.Data.SeedWorks
 {
     public class RepositoryBase<T, Key> : IRepository<T, Key> where T : class
     {
-        private readonly DevBlogContext _context;
+        protected readonly DevBlogContext _context;
         private readonly DbSet<T> _dbSet;
 
         public RepositoryBase(DevBlogContext context)

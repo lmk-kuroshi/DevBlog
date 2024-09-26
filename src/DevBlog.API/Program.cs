@@ -1,7 +1,9 @@
 using DevBlog.API;
 using DevBlog.Core.Domain.Identity;
+using DevBlog.Core.Repositories;
 using DevBlog.Core.SeedWorks;
 using DevBlog.Data;
+using DevBlog.Data.Repositories;
 using DevBlog.Data.SeedWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +42,21 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Add services to the container.
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//Business services and repository
+var services = typeof(PostRepository).Assembly.GetTypes()
+    .Where(x => x.GetInterfaces().Any(i => i.Name == typeof(IRepository<,>).Name)
+    && !x.IsAbstract && x.IsClass && !x.IsGenericType);
+
+foreach (var service in services)
+{
+    var allInterfaces = service.GetInterfaces();
+    var directInterface = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces())).FirstOrDefault();
+    if (directInterface != null)
+    {
+        builder.Services.Add(new ServiceDescriptor(directInterface, service, ServiceLifetime.Scoped));
+    }
+}
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
