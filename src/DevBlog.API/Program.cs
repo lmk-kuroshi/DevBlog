@@ -8,6 +8,8 @@ using DevBlog.Data.Repositories;
 using DevBlog.Data.SeedWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -65,15 +67,31 @@ builder.Services.AddAutoMapper(typeof(PostInListDto));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.CustomOperationIds(apiDesc =>
+    {
+    return apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null;
+    });
+    c.SwaggerDoc("AdminAPI", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "API for Administrators",
+        Description = "API for CMS core domain. This domain keeps track of campaigns, campaign rules, and campaign execution."
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("AdminAPI/swagger.json", "Admin API");
+        c.DisplayOperationId();
+        c.DisplayRequestDuration();
+    });
 }
 
 app.UseHttpsRedirection();
