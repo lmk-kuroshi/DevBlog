@@ -1,13 +1,14 @@
 using DevBlog.API;
 using DevBlog.Core.Domain.Identity;
+using DevBlog.Core.SeedWorks;
 using DevBlog.Data;
+using DevBlog.Data.SeedWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
-// Add services to the container.
 
 //Config DB Context and ASP.NET Core Identity
 builder.Services.AddDbContext<DevBlogContext>(options =>
@@ -35,6 +36,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 });
+
+// Add services to the container.
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
