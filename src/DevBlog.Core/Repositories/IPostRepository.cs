@@ -1,4 +1,6 @@
 ﻿using DevBlog.Core.Domain.Content;
+using DevBlog.Core.Models;
+using DevBlog.Core.Models.Content;
 using DevBlog.Core.SeedWorks;
 
 namespace DevBlog.Core.Repositories
@@ -6,6 +8,6 @@ namespace DevBlog.Core.Repositories
     public interface IPostRepository : IRepository<Post,Guid>
     {
         Task<List<Post>> GetPopularPostAsync(int count);
-
+        Task<PagedResult<PostInListDto>> GetPostPagingAsync(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 10); 
     }
 }
