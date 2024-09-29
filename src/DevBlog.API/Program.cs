@@ -1,4 +1,7 @@
+using DevBlog.Api.Services;
 using DevBlog.API;
+using DevBlog.API.Services;
+using DevBlog.Core.ConfigOptions;
 using DevBlog.Core.Domain.Identity;
 using DevBlog.Core.Models.Content;
 using DevBlog.Core.Repositories;
@@ -61,7 +64,15 @@ foreach (var service in services)
     }
 }
 
+//Automapper
 builder.Services.AddAutoMapper(typeof(PostInListDto));
+
+//Authen and author
+builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
