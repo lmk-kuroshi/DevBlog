@@ -1,5 +1,6 @@
 using DevBlog.Api.Services;
 using DevBlog.API;
+using DevBlog.API.Filters;
 using DevBlog.API.Services;
 using DevBlog.Core.ConfigOptions;
 using DevBlog.Core.Domain.Identity;

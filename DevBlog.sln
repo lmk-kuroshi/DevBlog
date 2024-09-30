@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevBlog.API", "src\DevBlog.API\DevBlog.API.csproj", "{A60D4509-096A-4435-80D2-52A4CD599590}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.API", "src\DevBlog.API\DevBlog.API.csproj", "{A60D4509-096A-4435-80D2-52A4CD599590}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevBlog.Core", "src\DevBlog.Core\DevBlog.Core.csproj", "{1EB3B80B-E6C0-4A7F-9E0D-D1BFEE5BE222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Core", "src\DevBlog.Core\DevBlog.Core.csproj", "{1EB3B80B-E6C0-4A7F-9E0D-D1BFEE5BE222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevBlog.Data", "src\DevBlog.Data\DevBlog.Data.csproj", "{04F5A495-1C05-4E33-B8CB-41B9BACB76F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Data", "src\DevBlog.Data\DevBlog.Data.csproj", "{04F5A495-1C05-4E33-B8CB-41B9BACB76F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevBlog.WebApp", "src\DevBlog.WebApp\DevBlog.WebApp.csproj", "{4A707F87-C740-4910-A48E-470C9059FCCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.WebApp", "src\DevBlog.WebApp\DevBlog.WebApp.csproj", "{4A707F87-C740-4910-A48E-470C9059FCCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05127ABC-61D4-482C-A718-39FC7FEE6999}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
